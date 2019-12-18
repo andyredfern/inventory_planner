@@ -1,0 +1,36 @@
+{
+    "name": "andyredfern/inventory_planner",
+    "description": "A PHP wrapper for Inventory Planner's API",
+    "keywords": [
+        "inventory planner", "api", "wrapper", "php"
+    ],
+    "homepage": "https://github.com/andyredfern/inventory_planner",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andy Redfern",
+            "email": "andy@redfern.it",
+            "homepage": "http://redfern.it",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php" : ">=5.6.0",
+        "phpunit/phpunit": "^8.5",
+        "guzzlehttp/guzzle": "^6.5",
+        "psr/log": "^1.1",
+        "vlucas/phpdotenv": "^4.0"
+    },
+    
+    "autoload": {
+        "psr-4": {
+            "Aredfern\\Invplan\\": "app"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Aredfern\\Invplan\\Test\\": "tests"
+        }
+    }
+
+}
