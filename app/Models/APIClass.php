@@ -77,11 +77,46 @@ class APIClass
             ]
         ]);
 
-        return json_decode($res->getBody());
+        return json_decode($res->getBody(),true);
         
     }
 
+    public function patchResource($resourceType, $resourceId, $data_array) {
+        $client = new \GuzzleHttp\Client();
 
+        $url = self::$baseUrl . self::$apiVersion . "/" . $resourceType . "/" . $resourceId;
+        
+        $res = $client->request('PATCH', $url, [
+            'headers' => [
+                'Authorization' => self::$apiKey,
+                'Account'     => self::$accountId,
+                'Accept'    => 'application/json',
+            ],
+            'json' => $data_array
+        ]);
+
+        return json_decode($res->getBody(),true);
+        
+    }
+
+    public function putResource($resourceType, $resourceId, $data_array) {
+  
+        $client = new \GuzzleHttp\Client();
+
+        $url = self::$baseUrl . self::$apiVersion . "/" . $resourceType . "/" . $resourceId;
+        
+        $res = $client->request('PUT', $url, [
+            'headers' => [
+                'Authorization' => self::$apiKey,
+                'Account'     => self::$accountId,
+                'Accept'    => 'application/json',
+            ],
+            'json' => $data_array
+        ]);
+
+        return json_decode($res->getBody(),true);
+        
+    }
 
 
 
