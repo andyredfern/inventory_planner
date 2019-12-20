@@ -65,55 +65,63 @@ class APIClass
         }
     }
 
-    public function getResource($resourceType, $resourceId) {
+    public function getResource($resourceType) {
         $client = new \GuzzleHttp\Client();
 
-        $url = self::$baseUrl . self::$apiVersion . "/" . $resourceType . "/" . $resourceId;
+        $url = self::$baseUrl . self::$apiVersion . "/" . $resourceType;
         
-        $res = $client->request('GET', $url, [
-            'headers' => [
-                'Authorization' => self::$apiKey,
-                'Account'     => self::$accountId
-            ]
-        ]);
-
+        try {
+            $res = $client->request('GET', $url, [
+                'headers' => [
+                    'Authorization' => self::$apiKey,
+                    'Account'     => self::$accountId
+                ]
+            ]);
+        } catch (Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
         return json_decode($res->getBody(),true);
         
     }
 
-    public function patchResource($resourceType, $resourceId, $data_array) {
+    public function patchResource($resourceType, $data_array) {
         $client = new \GuzzleHttp\Client();
 
-        $url = self::$baseUrl . self::$apiVersion . "/" . $resourceType . "/" . $resourceId;
-        
-        $res = $client->request('PATCH', $url, [
-            'headers' => [
-                'Authorization' => self::$apiKey,
-                'Account'     => self::$accountId,
-                'Accept'    => 'application/json',
-            ],
-            'json' => $data_array
-        ]);
-
+        $url = self::$baseUrl . self::$apiVersion . "/" . $resourceType;
+        try {
+            $res = $client->request('PATCH', $url, [
+                'headers' => [
+                    'Authorization' => self::$apiKey,
+                    'Account'     => self::$accountId,
+                    'Accept'    => 'application/json',
+                ],
+                'json' => $data_array
+            ]);
+        } catch (Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
         return json_decode($res->getBody(),true);
         
     }
 
-    public function putResource($resourceType, $resourceId, $data_array) {
+    public function putResource($resourceType, $data_array) {
   
         $client = new \GuzzleHttp\Client();
 
-        $url = self::$baseUrl . self::$apiVersion . "/" . $resourceType . "/" . $resourceId;
+        $url = self::$baseUrl . self::$apiVersion . "/" . $resourceType;
         
-        $res = $client->request('PUT', $url, [
-            'headers' => [
-                'Authorization' => self::$apiKey,
-                'Account'     => self::$accountId,
-                'Accept'    => 'application/json',
-            ],
-            'json' => $data_array
-        ]);
-
+        try {
+            $res = $client->request('PUT', $url, [
+                'headers' => [
+                    'Authorization' => self::$apiKey,
+                    'Account'     => self::$accountId,
+                    'Accept'    => 'application/json',
+                ],
+                'json' => $data_array
+            ]);
+        } catch (Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
         return json_decode($res->getBody(),true);
         
     }

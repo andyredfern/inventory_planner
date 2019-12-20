@@ -13,10 +13,10 @@ During the development of this wrapper a number of tests failed or needed tweaki
 However, we woudl love to hear from you if you want to help push the project forward. Please checkout the [Contribution guidelines for this project](docs/CONTRIBUTING.md) if you are interested.
 
 ## Standing on the Shoulders of Giants
-A big thank you to all the open sopurce projects that developing a package like this possible.
+A big thank you to all the open sopurce projects that make developing a package like this possible.
 
-PHP
-PHP Unit
-GuzzleHttp
-psr/log
-vlucas/phpdotenv
+[PHP](https://www.php.net/)
+[PHP Unit](https://github.com/sebastianbergmann/phpunit)
+[GuzzleHttp](https://github.com/guzzle/guzzle)
+[psr/log](https://github.com/php-fig/log)
+[vlucas/phpdotenv](https://github.com/vlucas/phpdotenv)

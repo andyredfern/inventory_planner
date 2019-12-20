@@ -13,7 +13,7 @@ class PurchaseOrders extends APIclass
 
     public function get($fields=null,$sort=null,$limit=null,$page=null) {  
         
-        $returned = $this->getResource("purchase-orders",$id);
+        $returned = $this->getResource("purchase-orders/".$id);
         return $returned;
     }
 

@@ -12,7 +12,7 @@ class Variant extends APIclass
 {
 
     public function getById($id) {  
-        $returned = $this->getResource("variant",$id);
+        $returned = $this->getResource("variants/".$id);
         return $returned;
     }
 
