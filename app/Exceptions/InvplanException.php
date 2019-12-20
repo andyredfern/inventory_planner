@@ -3,7 +3,7 @@
 namespace Aredfern\Invplan\Exceptions;
 
 /**
- * Class DiffbotException
+ * Class InvplanException
  * @package Aredfern\Invplan\Exceptions
  */
 class InvplanException extends \Exception

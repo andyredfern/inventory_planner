@@ -1,7 +1,19 @@
 # API Cheat Sheet
 While developing this wrapper I identified a number of nuances to the exact implementation of the Inventory Plannner API. There are no formal docs for the API currently just a help sheet  
 
-## Purchase Order Update
+## Variant
+### The variant url key
+The official docs show the variant route as 
+``` 
+GET /api/v1/variant/{id}
+```
+However, the route is actually:
+``` 
+GET /api/v1/variants/{id}
+```
+
+## Purchase Order 
+### Updating an existing Purchase order
 
 The official docs show the date fields as date only fields in MySQL date format sometimes in RFC822 format ("2020-06-25T15:25:22+00:00").
 
@@ -10,7 +22,7 @@ However, to use the PUT, PATCH or POST methods you need to supply the date as ti
 ``` 
 PUT /api/v1/purchase-orders/{purchase_order_id}
 ```
-```json
+```javascript
 {
     'purchase-order':{
         'expected_date':1576619927
@@ -18,7 +30,7 @@ PUT /api/v1/purchase-orders/{purchase_order_id}
 }
 ```
 returns:
-```json
+```javascript
 {
     'purchase-order':{
         ...
@@ -28,7 +40,7 @@ returns:
 }
 ```
 However using the same URL with:
-```json
+```javascript
 {
     'purchase-order':{
         'expected_date':"2019-12-17"
@@ -36,7 +48,7 @@ However using the same URL with:
 }
 ```
 returns:
-```json
+```javascript
 {
     'purchase-order':{
         ...
