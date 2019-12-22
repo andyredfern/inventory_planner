@@ -8,13 +8,23 @@ Use Aredfern\Invplan\Models\APIClass;
  *
  * @package Aredfern\InvPlan
  */
-class Variants extends APIclass
+class Variants
 {
+
+    private $interface = null;
+
+
+    public function __construct($interface) {
+        $this->interface = $interface;
+    }
+
+
+
 
     public function getCollection($fields, $sort_field, $sort_direction,$limit,$page) { 
         $url =  "variants?fields=" . $fields . "&" .$sort_field."=".$sort_direction."&limit=".$limit."&page=".$page;
         echo "URL " . $url;
-        $returned = $this->getResource($url);
+        $returned = $this->interface->getResource($url);
         return $returned;
     }
 

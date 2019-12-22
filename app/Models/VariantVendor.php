@@ -10,9 +10,17 @@ Use Aredfern\Invplan\Models\APIClass;
  */
 class VariantVendor extends APIclass
 {
+    private $interface = null;
+
+
+    public function __construct($interface) {
+        $this->interface = $interface;
+    }
+
+
 
     public function getById($id) {  
-        $returned = $this->getResource("variant-vendors/".$id);
+        $returned = $this->interface->getResource("variant-vendors/".$id);
         return $returned;
     }
 

@@ -8,12 +8,19 @@ Use Aredfern\Invplan\Models\APIClass;
  *
  * @package Aredfern\InvPlan
  */
-class PurchaseOrders extends APIclass
+class PurchaseOrders
 {
+    private $interface = null;
+
+
+    public function __construct($interface) {
+        $this->interface = $interface;
+    }
+
 
     public function get($fields=null,$sort=null,$limit=null,$page=null) {  
         
-        $returned = $this->getResource("purchase-orders/".$id);
+        $returned = $this->interface->getResource("purchase-orders/".$id);
         return $returned;
     }
 

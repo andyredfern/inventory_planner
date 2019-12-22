@@ -8,29 +8,35 @@ Use Aredfern\Invplan\Models\APIClass;
  *
  * @package Aredfern\InvPlan
  */
-class PurchaseOrder extends APIclass
+class PurchaseOrder
 {
+    private $interface = null;
+
+
+    public function __construct($interface) {
+        $this->interface = $interface;
+    }
 
     public function getById($id) {  
-        $returned = $this->getResource("purchase-orders/".$id);
+        $returned = $this->interface->getResource("purchase-orders/".$id);
         return $returned;
     }
 
     public function applyPatch($id,$PurchaseOrder) {
-        $returned = $this->patchResource("purchase-orders/".$id,$PurchaseOrder);
+        $returned = $this->interface->patchResource("purchase-orders/".$id,$PurchaseOrder);
         return $returned;
     }
 
     public function applyUpdate($id,$PurchaseOrder) {
         echo "Apply update<br>";
         echo $id;
-        echo $PurchaseOrder;
-        $returned = $this->putResource("purchase-orders/".$id, $PurchaseOrder);
+        print_r($PurchaseOrder);
+        $returned = $this->interface->putResource("purchase-orders/".$id, $PurchaseOrder);
         return $returned;
     }
 
     public function create($PurchaseOrder) {
-        $returned = $this->postResource("purchase-orders",$PurchaseOrder);
+        $returned = $this->interface->postResource("purchase-orders",$PurchaseOrder);
         return $returned;
     }
 

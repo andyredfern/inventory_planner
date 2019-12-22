@@ -8,11 +8,16 @@ Use Aredfern\Invplan\Models\APIClass;
  *
  * @package Aredfern\InvPlan
  */
-class Variant extends APIclass
+class Variant
 {
+    private $interface = null;
+
+    public function __construct($interface) {
+        $this->interface = $interface;
+    }
 
     public function getById($id) {  
-        $returned = $this->getResource("variants/".$id);
+        $returned = $this->interface->getResource("variants/".$id);
         return $returned;
     }
 
