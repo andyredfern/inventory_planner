@@ -1,11 +1,11 @@
 <?php
 
-namespace Aredfern\Invplan\Interfaces;
+namespace Aredfern\Invplan\Models;
+use Aredfern\Invplan\Interfaces\ApiInterface;
 use Aredfern\Invplan\Exceptions\InvplanException;
 use \GuzzleHttp\Client;
 
-
-class InvPlanAPI implements APIClass
+class InvPlanAPI implements ApiInterface
 {
 
     /** @var string The Inventory Planner API access key */
