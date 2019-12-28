@@ -127,7 +127,26 @@ class InvPlanAPI implements ApiInterface
         
     }
 
+    public function postResource($resourceType, $data_array) {
+  
+        $client = new \GuzzleHttp\Client();
 
+        $url = self::$baseUrl . self::$apiVersion . "/" . $resourceType;
+        
+        try {
+            $res = $client->request('POST', $url, [
+                'headers' => [
+                    'Authorization' => self::$apiKey,
+                    'Account'     => self::$accountId,
+                    'Accept'    => 'application/json',
+                ],
+                'json' => $data_array
+            ]);
+        } catch (Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
+        return json_decode($res->getBody(),true); 
+    }
 
 
 
