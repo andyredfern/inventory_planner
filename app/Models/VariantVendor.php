@@ -8,7 +8,7 @@ Use Aredfern\Invplan\Models\APIClass;
  *
  * @package Aredfern\InvPlan
  */
-class VariantVendor extends APIclass
+class VariantVendor
 {
     private $interface = null;
 

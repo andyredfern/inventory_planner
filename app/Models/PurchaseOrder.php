@@ -10,6 +10,8 @@ Use Aredfern\Invplan\Models\APIClass;
  */
 class PurchaseOrder
 {
+
+    /** @var string The interface controls which API gets called by the class. For live Guzzle is injected in. */
     private $interface = null;
 
 

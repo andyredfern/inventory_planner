@@ -6,7 +6,10 @@ use Aredfern\Invplan\Models\InvPlanAPI;
 class PurchaseOrderTest extends \PHPUnit\Framework\TestCase
 {
 
+    /** @var string Mock token used by mockbuilder */
     protected static $TOKEN = "123456789";
+    
+    /** @var string Mock token used by mockbuilder */
     protected static $ACCOUNT = "987654321";
 
     public function setUp():void {

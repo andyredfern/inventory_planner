@@ -10,6 +10,7 @@ Use Aredfern\Invplan\Models\APIClass;
  */
 class Variant
 {
+    /** @var string The interface controls which API gets called by the class. For live Guzzle is injected in. */
     private $interface = null;
 
     public function __construct($interface) {
