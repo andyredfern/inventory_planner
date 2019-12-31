@@ -35,6 +35,45 @@ class VariantTest extends \PHPUnit\Framework\TestCase
         $this->assertArrayHasKey("variant",$testArray);
     }
     
+    /** @test  */
+    public function patch_a_variant_that_exists() {
+        $patchResponse = array("variant"=>array("sku"=>"123456"));
+
+        $api = $this->getMockBuilder('Aredfern\Invplan\Models\InvPlanAPI')
+            ->setConstructorArgs(array(self::$TOKEN, self::$ACCOUNT))
+            ->getMock();
+
+        $api->expects($this->once())
+            ->method('patchResource')
+            ->will($this->returnValue($patchResponse));
+
+        $this->Variant = new Models\Variant($api);
+        $variant_patch_array=array('variant'=>array('barcode'=>5012345678901,'brand' => "Coca Cola"));
+
+        $testArray = $this->Variant->applyPatch(1,$variant_patch_array);
+        $this->assertIsArray($testArray);
+        $this->assertArrayHasKey("variant",$testArray);
+    }
+
+    /** @test  */
+    public function put_a_variant_that_exists() {
+        $putResponse = array("variant"=>array("sku"=>"123456"));
+
+        $api = $this->getMockBuilder('Aredfern\Invplan\Models\InvPlanAPI')
+            ->setConstructorArgs(array(self::$TOKEN, self::$ACCOUNT))
+            ->getMock();
+
+        $api->expects($this->once())
+            ->method('putResource')
+            ->will($this->returnValue($putResponse));
+
+        $this->Variant = new Models\Variant($api);
+        $variant_patch_array=array('variant'=>array('barcode'=>5012345678901,'brand' => "Coca Cola"));
+
+        $testArray = $this->Variant->applyUpdate(1,$variant_patch_array);
+        $this->assertIsArray($testArray);
+        $this->assertArrayHasKey("variant",$testArray);
+    }
    
 
 }

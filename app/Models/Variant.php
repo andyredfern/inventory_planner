@@ -22,5 +22,24 @@ class Variant
         return $returned;
     }
 
+    public function applyPatch($id,$variant) {
+        $returned = $this->interface->patchResource("variants/".$id,$variant);
+        return $returned;
+    }
+
+    public function applyUpdate($id,$variant) {
+        echo "Apply update<br>";
+        echo $id;
+        print_r($variant);
+        $returned = $this->interface->putResource("variants/".$id, $variant);
+        return $returned;
+    }
+
+    public function create($variant) {
+        $returned = $this->interface->postResource("variants",$variant);
+        return $returned;
+    }
+
+
 
 }

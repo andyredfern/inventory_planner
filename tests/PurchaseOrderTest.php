@@ -75,5 +75,37 @@ class PurchaseOrderTest extends \PHPUnit\Framework\TestCase
         $this->assertArrayHasKey("purchase-order",$testArray);
     }
 
+    /** @test  */
+    public function create_a_new_purchase_order() {
+
+        $new_purchase_order = array("purchase-order"=>array(
+                "status"=>"OPEN",
+                "reference"=>"MY_PO_21",
+                "expected_date"=>strtotime("now"),
+                "vendor"=> "vendor_1",
+                "warehouse" => "warehouee_1",
+                "variants_filter"=>array(
+                    "vendor"=>"liforme",
+                    "replenishment_gt"=>'3'
+                )
+            )
+        );
+
+        $postResponse = array("purchase-order"=>array("type"=>"po"));
+
+        $api = $this->getMockBuilder('Aredfern\Invplan\Models\InvPlanAPI')
+            ->setConstructorArgs(array(self::$TOKEN, self::$ACCOUNT))
+            ->getMock();
+
+        $api->expects($this->once())
+            ->method('postResource')
+            ->will($this->returnValue($postResponse));
+
+        $this->PurchaseOrder = new Models\PurchaseOrder($api);
+        $po_put_array=array('purchase-order'=>array('expected_date'=>1577019503,'email' => "test@test.com"));
+        $testArray = $this->PurchaseOrder->create($new_purchase_order);
+        $this->assertIsArray($testArray);
+        $this->assertArrayHasKey("purchase-order",$testArray);
+    }
 
 }

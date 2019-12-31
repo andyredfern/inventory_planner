@@ -30,9 +30,6 @@ class PurchaseOrder
     }
 
     public function applyUpdate($id,$PurchaseOrder) {
-        echo "Apply update<br>";
-        echo $id;
-        print_r($PurchaseOrder);
         $returned = $this->interface->putResource("purchase-orders/".$id, $PurchaseOrder);
         return $returned;
     }
@@ -41,9 +38,4 @@ class PurchaseOrder
         $returned = $this->interface->postResource("purchase-orders",$PurchaseOrder);
         return $returned;
     }
-
-
-
-
-
 }

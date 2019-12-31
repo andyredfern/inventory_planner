@@ -13,7 +13,7 @@ GET /api/v1/variants/{id}
 ```
 
 ## Purchase Order 
-### Updating an existing Purchase order
+### Updating an existing Purchase order or creating a new purchase order
 
 The official docs show the date fields as date only fields in MySQL date format sometimes in RFC822 format ("2020-06-25T15:25:22+00:00").
 
@@ -56,4 +56,39 @@ returns:
         ...
     }
 }
+```
 Ouch!
+
+### Creating an existing Purchase order
+The API allows a Purchase order to be created using a POST. The suggested structure in the docs is:
+```
+{
+    "purchase-order": {
+        "status": "OPEN",
+        "reference": "MY_PO_20",
+        "expected_date": "2018-03-15T10:00:00+01:00",
+        "vendor": "vendor_1",
+        "variants_filter": {
+            "vendor": "vendor_1",
+            "replenishment_gt": 3
+        }
+    }
+}
+```
+However, this will not work as Inventory Planner now requires a warehouse to be set so the minimum requirement is:
+```
+{
+    "purchase-order": {
+        "status": "OPEN",
+        "reference": "MY_PO_20",
+        "expected_date": "2018-03-15T10:00:00+01:00",
+        "vendor": "vendor_1",
+        "warehouse": "warehouse_1",
+        "variants_filter": {
+            "vendor": "vendor_1",
+            "replenishment_gt": 3
+        }
+    }
+}
+```
+and you do need to fix the date too.
