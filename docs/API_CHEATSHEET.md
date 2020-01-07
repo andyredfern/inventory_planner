@@ -13,6 +13,16 @@ GET /api/v1/variants/{id}
 ```
 
 ## Purchase Order 
+### Incorrect route for getting all purchase orders
+Docs show route is:
+```
+GET api/v1/puchase-orders
+```
+Clearly a typo and correct route is:
+```
+GET api/v1/purchase-orders
+```
+
 ### Updating an existing Purchase order or creating a new purchase order
 
 The official docs show the date fields as date only fields in MySQL date format sometimes in RFC822 format ("2020-06-25T15:25:22+00:00").

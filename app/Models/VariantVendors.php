@@ -4,11 +4,11 @@ namespace Aredfern\Invplan\Models;
 Use Aredfern\Invplan\Models\APIClass;
 
 /**
- * Class VariantVendor
+ * Class VariantVendors
  *
  * @package Aredfern\InvPlan
  */
-class VariantVendor
+class VariantVendors
 {
     private $interface = null;
 
@@ -19,8 +19,8 @@ class VariantVendor
 
 
 
-    public function getById($id,$vendorId) {  
-        $returned = $this->interface->getResource("variants/".$id."/vendor/" .$vendorId);
+    public function getById($id) {  
+        $returned = $this->interface->getResource("variants/".$id."/vendors");
         return $returned;
     }
 

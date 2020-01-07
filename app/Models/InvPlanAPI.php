@@ -70,7 +70,6 @@ class InvPlanAPI implements ApiInterface
         $client = new \GuzzleHttp\Client();
 
         $url = self::$baseUrl . self::$apiVersion . "/" . $resourceType;
-        
         try {
             $res = $client->request('GET', $url, [
                 'headers' => [

@@ -18,12 +18,9 @@ class Variants
         $this->interface = $interface;
     }
 
-
-
-
-    public function getCollection($fields, $sort_field, $sort_direction,$limit,$page) { 
-        $url =  "variants?fields=" . $fields . "&" .$sort_field."=".$sort_direction."&limit=".$limit."&page=".$page;
-        echo "URL " . $url;
+    public function getCollection($fields, $sort_field, $sort_direction,$limit,$page,$filter) {
+        $filter_url = http_build_query($filter);  
+        $url =  "variants?fields=" . $fields . "&" .$sort_field."=".$sort_direction."&limit=".$limit."&page=".$page."&".$filter_url;
         $returned = $this->interface->getResource($url);
         return $returned;
     }
