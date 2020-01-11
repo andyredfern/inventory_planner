@@ -1,3 +1,7 @@
+[![Latest Version on Packagist][ico-version]][link-packagist]
+[![Software License][ico-license]](LICENSE.md)
+
+
 # PHP Wrapper for Inventory Planner
 
 Inventory Planner is a SaaS product for planning and processing inventory. It integrates with a number of platforms - Shopify, Magento and Amazon - and [external API](http://help.inventory-planner.com/en/articles/674662-inventory-planner-public-api) that allows creating our own integrations.
@@ -16,7 +20,11 @@ However, we woudl love to hear from you if you want to help push the project for
 A big thank you to all the open sopurce projects that make developing a package like this possible.
 
 [PHP](https://www.php.net/)
+
 [PHP Unit](https://github.com/sebastianbergmann/phpunit)
+
 [GuzzleHttp](https://github.com/guzzle/guzzle)
+
 [psr/log](https://github.com/php-fig/log)
+
 [vlucas/phpdotenv](https://github.com/vlucas/phpdotenv)
