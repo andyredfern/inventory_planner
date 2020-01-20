@@ -1,26 +1,40 @@
 <?php
 
-namespace Aredfern\Invplan;
-use Aredfern\Invplan\Models\InvPlanAPI;
+namespace Andyredfern\Invplan;
+use Andyredfern\Invplan\Models\InvPlanAPI;
 
 class PurchaseOrderTest extends \PHPUnit\Framework\TestCase
 {
 
-    /** @var string Mock token used by mockbuilder */
+    /**
+     * 
+     *
+     * @var string Mock token used by mockbuilder 
+     */
     protected static $TOKEN = "123456789";
     
-    /** @var string Mock token used by mockbuilder */
+    /**
+     * 
+     *
+     * @var string Mock token used by mockbuilder 
+     */
     protected static $ACCOUNT = "987654321";
 
-    public function setUp():void {
+    public function setUp():void
+    {
 
     }
 
-    /** @test  */
-    public function get_a_purchase_order_that_exists() {
+    /**
+     * 
+     *
+     * @test 
+     */
+    public function getPurchaseOrderThatExists()
+    {
         $getResponse = array("purchase-order"=>array("type"=>"po"));
 
-        $api = $this->getMockBuilder('Aredfern\Invplan\Models\InvPlanAPI')
+        $api = $this->getMockBuilder('Andyredfern\Invplan\Models\InvPlanAPI')
             ->setConstructorArgs(array(self::$TOKEN, self::$ACCOUNT))
             ->getMock();
 
@@ -32,15 +46,20 @@ class PurchaseOrderTest extends \PHPUnit\Framework\TestCase
 
         $testArray = $this->PurchaseOrder->getById(1);
         $this->assertIsArray($testArray);
-        $this->assertArrayHasKey("purchase-order",$testArray);
+        $this->assertArrayHasKey("purchase-order", $testArray);
     }
     
-    /** @test  */
-    public function patch_a_purchase_order_that_exists() {
+    /**
+     * 
+     *
+     * @test 
+     */
+    public function patch_a_purchase_order_that_exists()
+    {
 
         $patchResponse = array("purchase-order"=>array("type"=>"po"));
 
-        $api = $this->getMockBuilder('Aredfern\Invplan\Models\InvPlanAPI')
+        $api = $this->getMockBuilder('Andyredfern\Invplan\Models\InvPlanAPI')
             ->setConstructorArgs(array(self::$TOKEN, self::$ACCOUNT))
             ->getMock();
 
@@ -50,17 +69,22 @@ class PurchaseOrderTest extends \PHPUnit\Framework\TestCase
 
         $this->PurchaseOrder = new Models\PurchaseOrder($api);
         $po_patch_array=array('purchase-order'=>array('expected_date'=>1577019503,'email' => "test@test.com"));
-        $testArray = $this->PurchaseOrder->applyPatch(1,$po_patch_array);
+        $testArray = $this->PurchaseOrder->applyPatch(1, $po_patch_array);
         $this->assertIsArray($testArray);
-        $this->assertArrayHasKey("purchase-order",$testArray);
+        $this->assertArrayHasKey("purchase-order", $testArray);
     }
 
-    /** @test  */
-    public function put_a_purchase_order_that_exists() {
+    /**
+     * 
+     *
+     * @test 
+     */
+    public function put_a_purchase_order_that_exists()
+    {
 
         $putResponse = array("purchase-order"=>array("type"=>"po"));
 
-        $api = $this->getMockBuilder('Aredfern\Invplan\Models\InvPlanAPI')
+        $api = $this->getMockBuilder('Andyredfern\Invplan\Models\InvPlanAPI')
             ->setConstructorArgs(array(self::$TOKEN, self::$ACCOUNT))
             ->getMock();
 
@@ -70,13 +94,18 @@ class PurchaseOrderTest extends \PHPUnit\Framework\TestCase
 
         $this->PurchaseOrder = new Models\PurchaseOrder($api);
         $po_put_array=array('purchase-order'=>array('expected_date'=>1577019503,'email' => "test@test.com"));
-        $testArray = $this->PurchaseOrder->applyUpdate(1,$po_put_array);
+        $testArray = $this->PurchaseOrder->applyUpdate(1, $po_put_array);
         $this->assertIsArray($testArray);
-        $this->assertArrayHasKey("purchase-order",$testArray);
+        $this->assertArrayHasKey("purchase-order", $testArray);
     }
 
-    /** @test  */
-    public function create_a_new_purchase_order() {
+    /**
+     * 
+     *
+     * @test 
+     */
+    public function create_a_new_purchase_order()
+    {
 
         $new_purchase_order = array("purchase-order"=>array(
                 "status"=>"OPEN",
@@ -93,7 +122,7 @@ class PurchaseOrderTest extends \PHPUnit\Framework\TestCase
 
         $postResponse = array("purchase-order"=>array("type"=>"po"));
 
-        $api = $this->getMockBuilder('Aredfern\Invplan\Models\InvPlanAPI')
+        $api = $this->getMockBuilder('Andyredfern\Invplan\Models\InvPlanAPI')
             ->setConstructorArgs(array(self::$TOKEN, self::$ACCOUNT))
             ->getMock();
 
@@ -105,7 +134,7 @@ class PurchaseOrderTest extends \PHPUnit\Framework\TestCase
         $po_put_array=array('purchase-order'=>array('expected_date'=>1577019503,'email' => "test@test.com"));
         $testArray = $this->PurchaseOrder->create($new_purchase_order);
         $this->assertIsArray($testArray);
-        $this->assertArrayHasKey("purchase-order",$testArray);
+        $this->assertArrayHasKey("purchase-order", $testArray);
     }
 
 }

@@ -27,12 +27,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Aredfern\\Invplan\\": "src"
+            "Andyredfern\\Invplan\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Aredfern\\Invplan\\Test\\": "tests"
+            "Andyredfern\\Invplan\\Test\\": "tests"
         }
     },
     "scripts": {

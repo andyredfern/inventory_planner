@@ -1,25 +1,27 @@
 <?php
 
-namespace Aredfern\Invplan\Models;
-Use Aredfern\Invplan\Models\APIClass;
+namespace Andyredfern\Invplan\Models;
+Use Andyredfern\Invplan\Models\APIClass;
 
 /**
  * Class VariantVendor
  *
- * @package Aredfern\InvPlan
+ * @package Andyredfern\InvPlan
  */
 class VariantVendor
 {
     private $interface = null;
 
 
-    public function __construct($interface) {
+    public function __construct($interface)
+    {
         $this->interface = $interface;
     }
 
 
 
-    public function getById($id,$vendorId) {  
+    public function getById($id,$vendorId)
+    {  
         $returned = $this->interface->getResource("variants/".$id."/vendor/" .$vendorId);
         return $returned;
     }

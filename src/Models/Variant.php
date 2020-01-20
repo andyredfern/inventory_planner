@@ -1,33 +1,41 @@
 <?php
 
-namespace Aredfern\Invplan\Models;
-Use Aredfern\Invplan\Models\APIClass;
+namespace Andyredfern\Invplan\Models;
+Use Andyredfern\Invplan\Models\APIClass;
 
 /**
  * Class Variant
  *
- * @package Aredfern\InvPlan
+ * @package Andyredfern\InvPlan
  */
 class Variant
 {
-    /** @var string The interface controls which API gets called by the class. For live Guzzle is injected in. */
+    /**
+     * 
+     *
+     * @var string The interface controls which API gets called by the class. For live Guzzle is injected in. 
+     */
     private $interface = null;
 
-    public function __construct($interface) {
+    public function __construct($interface)
+    {
         $this->interface = $interface;
     }
 
-    public function getById($id) {  
+    public function getById($id)
+    {  
         $returned = $this->interface->getResource("variants/".$id);
         return $returned;
     }
 
-    public function applyPatch($id,$variant) {
-        $returned = $this->interface->patchResource("variants/".$id,$variant);
+    public function applyPatch($id,$variant)
+    {
+        $returned = $this->interface->patchResource("variants/".$id, $variant);
         return $returned;
     }
 
-    public function applyUpdate($id,$variant) {
+    public function applyUpdate($id,$variant)
+    {
         echo "Apply update<br>";
         echo $id;
         print_r($variant);
@@ -35,8 +43,9 @@ class Variant
         return $returned;
     }
 
-    public function create($variant) {
-        $returned = $this->interface->postResource("variants",$variant);
+    public function create($variant)
+    {
+        $returned = $this->interface->postResource("variants", $variant);
         return $returned;
     }
 

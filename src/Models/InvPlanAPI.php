@@ -1,28 +1,43 @@
 <?php
 
-namespace Aredfern\Invplan\Models;
-use Aredfern\Invplan\Interfaces\ApiInterface;
-use Aredfern\Invplan\Exceptions\InvplanException;
+namespace Andyredfern\Invplan\Models;
+use Andyredfern\Invplan\Interfaces\ApiInterface;
+use Andyredfern\Invplan\Exceptions\InvplanException;
 use \GuzzleHttp\Client;
 
 class InvPlanAPI implements ApiInterface
 {
 
-    /** @var string The Inventory Planner API access key */
+    /**
+     * 
+     *
+     * @var string The Inventory Planner API access key 
+     */
     private static $apiKey = null;
 
-    /** @var string The Inventory Planner Account ID */
+    /**
+     * 
+     *
+     * @var string The Inventory Planner Account ID 
+     */
     private static $accountId = null;
 
-    /** @var string The Inventory Planner base url */
+    /**
+     * 
+     *
+     * @var string The Inventory Planner base url 
+     */
     private static  $baseUrl = null;
 
-    /** @var string The Inventory Planner API version */
+    /**
+     * 
+     *
+     * @var string The Inventory Planner API version 
+     */
     private static $apiVersion = null;
 
     /**
      * Create a new API Interface
-     *      
      *                              */
     public function __construct($token = null,$account = null)
     {
@@ -66,85 +81,97 @@ class InvPlanAPI implements ApiInterface
         }
     }
 
-    public function getResource($resourceType) {
+    public function getResource($resourceType)
+    {
         $client = new \GuzzleHttp\Client();
 
         $url = self::$baseUrl . self::$apiVersion . "/" . $resourceType;
         try {
-            $res = $client->request('GET', $url, [
+            $res = $client->request(
+                'GET', $url, [
                 'headers' => [
                     'Authorization' => self::$apiKey,
                     'Account'     => self::$accountId
                 ]
-            ]);
+                ]
+            );
         } catch (Exception $e) {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
-        return json_decode($res->getBody(),true);
+        return json_decode($res->getBody(), true);
         
     }
 
-    public function patchResource($resourceType, $data_array) {
+    public function patchResource($resourceType, $data_array)
+    {
         $client = new \GuzzleHttp\Client();
 
         $url = self::$baseUrl . self::$apiVersion . "/" . $resourceType;
         try {
-            $res = $client->request('PATCH', $url, [
+            $res = $client->request(
+                'PATCH', $url, [
                 'headers' => [
                     'Authorization' => self::$apiKey,
                     'Account'     => self::$accountId,
                     'Accept'    => 'application/json',
                 ],
                 'json' => $data_array
-            ]);
+                ]
+            );
         } catch (Exception $e) {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
-        return json_decode($res->getBody(),true);
+        return json_decode($res->getBody(), true);
         
     }
 
-    public function putResource($resourceType, $data_array) {
+    public function putResource($resourceType, $data_array)
+    {
   
         $client = new \GuzzleHttp\Client();
 
         $url = self::$baseUrl . self::$apiVersion . "/" . $resourceType;
         
         try {
-            $res = $client->request('PUT', $url, [
+            $res = $client->request(
+                'PUT', $url, [
                 'headers' => [
                     'Authorization' => self::$apiKey,
                     'Account'     => self::$accountId,
                     'Accept'    => 'application/json',
                 ],
                 'json' => $data_array
-            ]);
+                ]
+            );
         } catch (Exception $e) {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
-        return json_decode($res->getBody(),true);
+        return json_decode($res->getBody(), true);
         
     }
 
-    public function postResource($resourceType, $data_array) {
+    public function postResource($resourceType, $data_array)
+    {
   
         $client = new \GuzzleHttp\Client();
 
         $url = self::$baseUrl . self::$apiVersion . "/" . $resourceType;
         
         try {
-            $res = $client->request('POST', $url, [
+            $res = $client->request(
+                'POST', $url, [
                 'headers' => [
                     'Authorization' => self::$apiKey,
                     'Account'     => self::$accountId,
                     'Accept'    => 'application/json',
                 ],
                 'json' => $data_array
-            ]);
+                ]
+            );
         } catch (Exception $e) {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
-        return json_decode($res->getBody(),true); 
+        return json_decode($res->getBody(), true); 
     }
 
 
