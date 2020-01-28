@@ -87,7 +87,7 @@ class VariantProvider
 
     private function _parseResponse(array $response): Variant
     {
-        if (array_key_exists("result", $response)) {
+        if (array_key_exists("result", $response) && $response["result"]["status"] == "error") {
             throw new \Exception(json_encode($response));
         }
         return new Variant($response["variant"]);
