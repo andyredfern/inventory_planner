@@ -95,7 +95,7 @@ class InvPlanAPI implements ApiInterface
                 ]
                 ]
             );
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
         return json_decode($res->getBody(), true);
@@ -118,7 +118,7 @@ class InvPlanAPI implements ApiInterface
                 'json' => $data_array
                 ]
             );
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
         return json_decode($res->getBody(), true);
@@ -143,7 +143,7 @@ class InvPlanAPI implements ApiInterface
                 'json' => $data_array
                 ]
             );
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
         return json_decode($res->getBody(), true);
@@ -168,7 +168,7 @@ class InvPlanAPI implements ApiInterface
                 'json' => $data_array
                 ]
             );
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
         return json_decode($res->getBody(), true); 

@@ -5,7 +5,7 @@ namespace Aredfern\Invplan\Exceptions;
 /**
  * Class InvplanException
  *
- * @package Aredfern\Invplan\Exceptions
+ * @package Aredfern\Invplan
  */
 class InvplanException extends \Exception
 {

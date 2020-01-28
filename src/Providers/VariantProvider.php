@@ -1,15 +1,15 @@
 <?php
 
 namespace Andyredfern\Invplan\Providers;
-Use Andyredfern\Invplan\Models\PurchaseOrder;
+Use Andyredfern\Invplan\Models\Variant;
 use Andyredfern\Invplan\Models\SortConfig;
 
 /**
- * Class PurchaseOrderProvider
+ * Class VariantProvider
  *
  * @package Andyredfern\InvPlan
  */
-class PurchaseOrderProvider
+class VariantProvider
 {
 
     /**
@@ -28,7 +28,7 @@ class PurchaseOrderProvider
 
     public function getIds(array $filter, SortConfig $sortConfig): array
     {
-        $baseUrl =  "purchase-orders?";
+        $baseUrl =  "variants?";
 
         $fields = "id";
         $baseUrl .= "fields=" . $fields;
@@ -42,55 +42,55 @@ class PurchaseOrderProvider
             $baseUrl .= "&" .$sortConfig->getUrlField()."=".$sortConfig->getDirection();
         }
 
-        $purchaseOrderIds = array();
+        $variantIds = array();
         $page = 0;
         $isLastPage = 0;
 
         while ($isLastPage == 0) {
             $response = $this->_interface->getResource($this->_appendPagination($baseUrl, $page));
-            foreach ($response["purchase-orders"] as $purchaseOrder) {
-                $purchaseOrderIds[] = $purchaseOrder["id"];
+            foreach ($response["variants"] as $variant) {
+                $variantIds[] = $variant["id"];
             }
             $isLastPage = $response["meta"]["end"];
             $page++;
         }
 
-        return $purchaseOrderIds;
+        return $variantIds;
     }
 
-    public function getById(string $id): PurchaseOrder
+    public function getById(string $id): Variant
     {
-        $response = $this->_interface->getResource("purchase-orders/".$id);
+        $response = $this->_interface->getResource("variants/".$id);
         return $this->_parseResponse($response);
     }
 
-    public function applyPatch(string $id, PurchaseOrder $purchaseOrder): PurchaseOrder
+    public function applyPatch(string $id, Variant $variant): Variant
     {
-        $patch = array('purchase-order' => $purchaseOrder->getData());
-        $response = $this->_interface->patchResource("purchase-orders/".$id, $patch);
+        $patch = array('variant' => $variant->getData());
+        $response = $this->_interface->patchResource("variants/".$id, $patch);
         return $this->_parseResponse($response);
     }
 
-    public function applyUpdate(string $id, PurchaseOrder $purchaseOrder): PurchaseOrder
+    public function applyUpdate(string $id, Variant $variant): Variant
     {
-        $update = array('purchase-order' => $purchaseOrder->getData());
-        $response = $this->_interface->putResource("purchase-orders/".$id, $update);
+        $update = array('variant' => $variant->getData());
+        $response = $this->_interface->putResource("variants/".$id, $update);
         return $this->_parseResponse($response);
     }
 
-    public function create(PurchaseOrder $purchaseOrder): PurchaseOrder
+    public function create(Variant $variant): Variant
     {
-        $create = array('purchase-order' => $purchaseOrder->getData());
-        $response = $this->_interface->postResource("purchase-orders", $create);
+        $create = array('variant' => $variant->getData());
+        $response = $this->_interface->postResource("variants", $create);
         return $this->_parseResponse($response);
     }
 
-    private function _parseResponse(array $response)
+    private function _parseResponse(array $response): Variant
     {
         if (array_key_exists("result", $response)) {
             throw new \Exception(json_encode($response));
         }
-        return new PurchaseOrder($response["purchase-order"]);
+        return new Variant($response["variant"]);
     }
 
     private function _appendPagination(string $baseUrl, int $page): string

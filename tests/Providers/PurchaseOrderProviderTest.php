@@ -261,6 +261,31 @@ class PurchaseOrderTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($result, array("po1", "po2", "po3", "po4"));
     }
 
+    /**
+     * Test against real input from api.
+     *
+     * @test 
+     */
+    public function getPurchaseOrderIntegrationTest()
+    {
+        // Given
+        $jsonString = file_get_contents("./tests/Providers/TestData/get-purchase-order.json", true);
+        $this->_mockApi->expects($this->once())
+            ->method('getResource')
+            ->with($this->equalTo("purchase-orders/76s6df76sa978df78987s8f"))
+            ->will($this->returnValue(json_decode($jsonString, true)));
+
+        // When
+        $result = $this->getPurchaseOrderProvider()->getById("76s6df76sa978df78987s8f");
+
+        // Then
+        $this->assertEquals($result->getId(), "76s6df76sa978df78987s8f");
+        $this->assertEquals($result->type, "po");
+        $this->assertEquals(count($result->getItems()), 1);
+        $item = $result->getItems()[0];
+        $this->assertEquals($result->getItems()[0]->getId(), "1234");
+    }
+
     private function assertResult(PurchaseOrder $result)
     {
         $this->assertEquals($result->getId(), "po1");

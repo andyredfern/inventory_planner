@@ -1,0 +1,252 @@
+{
+    "variant": {
+        "connections": [],
+        "warehouse": [],
+        "product_id": "1234",
+        "title": "Car",
+        "product_title": "Car",
+        "created_at_time": "2016-05-31T10:27:48+00:00",
+        "updated_at_time": "2019-08-01T09:26:15+00:00",
+        "sku": "1234",
+        "image": "https://...",
+        "price": 10,
+        "regular_price": 10,
+        "options": [],
+        "product_type": "Car",
+        "tags": [],
+        "brand": "Car",
+        "barcode": "123456789",
+        "removed": false,
+        "inventory_management": true,
+        "handle": "Car",
+        "published": false,
+        "attributes": [
+            {
+                "n": "Car",
+                "t": "brand"
+            }
+        ],
+        "in_stock": 0,
+        "cost": 0,
+        "retail_value": 0,
+        "gross_retail_value": 0,
+        "last_forecast_time": 1580197499,
+        "replenishment": 0,
+        "purchase_orders_qty": 0,
+        "cost_price": 0,
+        "no_cost_variant_count": 0,
+        "alerts": {
+            "active": false
+        },
+        "stock_hist": [
+            [
+                "2019-10-30T20:00:00-04:00",
+                0
+            ]
+        ],
+        "stock_cost_hist": [
+            [
+                "2019-10-30T20:00:00-04:00",
+                0
+            ]
+        ],
+        "stock_retail_hist": [
+            [
+                "2019-10-30T20:00:00-04:00",
+                0
+            ]
+        ],
+        "stock_gross_hist": [
+            [
+                "2019-10-30T20:00:00-04:00",
+                0
+            ]
+        ],
+        "cost_price_hist": [
+            [
+                "2019-10-30T20:00:00-04:00",
+                0
+            ]
+        ],
+        "landing_cost_price_hist": [
+            [
+                "2019-10-30T20:00:00-04:00",
+                0
+            ]
+        ],
+        "retail_price_hist": [
+            [
+                "2019-10-30T20:00:00-04:00",
+                10
+            ]
+        ],
+        "regular_retail_price_hist": [
+            [
+                "2019-10-30T20:00:00-04:00",
+                10
+            ]
+        ],
+        "id": "1234",
+        "created_at": "2019-11-01T00:05:53+00:00",
+        "updated_at": "2020-01-28T07:46:10+00:00",
+        "version": 259,
+        "orders_by_month": {
+            "2020": {
+                "1": 0
+            }
+        },
+        "real_orders_by_month": {
+            "2020": {
+                "1": 0
+            }
+        },
+        "cur_month_revenue": 0,
+        "cur_month_sales": 0,
+        "orders_by_day": [],
+        "prev_month_revenue": 0,
+        "prev_month_sales": 0,
+        "revenue_by_month": [],
+        "total_revenue": 0,
+        "total_sales": 0,
+        "total_sales_cost": 0,
+        "lead_time": 14,
+        "review_period": 30,
+        "events": [],
+        "po_cost": 0,
+        "po_retail_value": 0,
+        "purchase_orders_qty_for_bundles": 0,
+        "purchase_orders_qty_in_bundles": 0,
+        "transfer_cost_in": 0,
+        "transfer_cost_out": 0,
+        "transfer_retail_in": 0,
+        "transfer_retail_out": 0,
+        "age": {
+            "cost": {
+                "0 - 30 days": 0,
+                "31 - 60 days": 0,
+                "61 - 90 days": 0,
+                "91 - 120 days": 0,
+                "120 - 180 days": 0,
+                "180 - 365 days": 0,
+                "> 365 days": 0
+            },
+            "qty": {
+                "0 - 30 days": 0,
+                "31 - 60 days": 0,
+                "61 - 90 days": 0,
+                "91 - 120 days": 0,
+                "120 - 180 days": 0,
+                "180 - 365 days": 0,
+                "> 365 days": 0
+            }
+        },
+        "cur_mean_oos": 0,
+        "cur_sales": 0,
+        "first_30_days_revenue": 0,
+        "first_30_days_sales": 0,
+        "first_60_days_revenue": 0,
+        "first_60_days_sales": 0,
+        "first_7_days_revenue": 0,
+        "first_7_days_sales": 0,
+        "last_180_days_revenue": 0,
+        "last_180_days_sales": 0,
+        "last_30_days_revenue": 0,
+        "last_30_days_sales": 0,
+        "last_365_days_revenue": 0,
+        "last_365_days_sales": 0,
+        "last_60_days_revenue": 0,
+        "last_60_days_sales": 0,
+        "last_7_days_revenue": 0,
+        "last_7_days_sales": 0,
+        "oos_last_60_days": 60,
+        "yesterday_revenue": 0,
+        "yesterday_sales": 0,
+        "segment": "C",
+        "forecast_by_period": {
+            "2020": {
+                "1": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0
+            },
+            "2021": {
+                "1": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0
+            }
+        },
+        "forecast_description": {
+            "method": "test",
+            "sales_velocity30": 0,
+            "sales_velocity1": 0,
+            "total_sales": 0,
+            "excluded_sales": 0,
+            "total_days": 1065,
+            "total_days_sales": 10,
+            "total_days_oos": 1,
+            "excluded_days": 32,
+            "excluded_periods": [],
+            "sales_from": "1 Dec, 2016",
+            "sales_to": "28 Jan, 2020",
+            "trend": 0,
+            "trend_months": 0,
+            "short_sales_history": true
+        },
+        "cur_forecast_before_review": 0,
+        "cur_forecasted_retail_value": 0,
+        "cur_forecasted_stock": 0,
+        "cur_revenue_forecast_before_review": 0,
+        "current_forecast": 0,
+        "current_forecast_cost": 0,
+        "current_revenue_forecast": 0,
+        "forecast_stock_cover_day": 0,
+        "forecast_stock_cover_mo": 0,
+        "forecast_stock_cover_week": 0,
+        "forecast_wholesale": 0,
+        "forecasted_lost_profit_lead_time": 0,
+        "forecasted_lost_revenue_lead_time": 0,
+        "forecasted_lost_revenue_velocity_days_of_stock": 0,
+        "forecasted_lost_sales_lead_time": 0,
+        "forecasted_profit": 0,
+        "forecasted_stock": 0,
+        "minimum_stock": 0,
+        "oos": 0,
+        "overstocked_cost": 0,
+        "overstocked_units": 0,
+        "overstocked_value": 0,
+        "overstocked_variants": 0,
+        "replenishment_cost_value": 0,
+        "replenishment_for_bundles": 0,
+        "replenishment_gross_retail_value": 0,
+        "replenishment_retail_value": 0,
+        "sells_out_in_first": 0,
+        "sells_out_in_last": 0,
+        "bundle_replenishment_without_pos": 0,
+        "purchase_orders_qty_bundles": 0,
+        "stock_info": "",
+        "stock_in_bundles": 0,
+        "hide_in_replenishment": true,
+        "oos_by_month_user": {
+            "2019": {
+                "10": 1,
+                "11": 1,
+                "12": 1
+            },
+            "2020": {
+                "1": 1
+            }
+        }
+    }
+}
