@@ -5,6 +5,8 @@ use Andyredfern\Invplan\Providers\InvPlanAPI;
 use Andyredfern\Invplan\Providers\PurchaseOrderProvider;
 use Andyredfern\Invplan\Models\PurchaseOrder;
 use Andyredfern\Invplan\Models\Item;
+use Andyredfern\Invplan\Models\SortConfig;
+use PhpOption\None;
 
 class PurchaseOrderTest extends \PHPUnit\Framework\TestCase
 {
@@ -100,7 +102,7 @@ class PurchaseOrderTest extends \PHPUnit\Framework\TestCase
      *
      * @test 
      */
-    public function patch_a_purchase_order_that_exists()
+    public function patchAPurchaseOrderThatExists()
     {
         // Given
         $purchaseOrderArray = array('expected_date'=>1577019503,'email' => "test@test.com");
@@ -119,6 +121,144 @@ class PurchaseOrderTest extends \PHPUnit\Framework\TestCase
 
         // Then
         $this->assertResult($result);
+    }
+
+    /**
+     * Should GET with correct url.
+     *
+     * @test 
+     */
+    public function getIdsWithNoFiltersAndNoSort()
+    {
+        // Given
+        $response = array(
+            "meta" => array(
+                "name" => "purchase-orders",
+                "display_name" => "purchase orders",
+                "total" => 2,
+                "count" => 2,
+                "limit" => PurchaseOrderProvider::$PAGINATION_LIMIT,
+                "page" => 0,
+                "start" => 0,
+                "end" => 1
+            ),
+            "purchase-orders" => array(
+                array("id" => "po1"),
+                array("id" => "po2"),
+            )
+        );
+        $expectedUrl = "purchase-orders?fields=id&limit=".PurchaseOrderProvider::$PAGINATION_LIMIT."&page=0";
+        $this->_mockApi->expects($this->once())
+            ->method('getResource')
+            ->with($this->equalTo($expectedUrl))
+            ->will($this->returnValue($response));
+
+        // When
+        $result = $this->getPurchaseOrderProvider()->getIds(array(), SortConfig::none());
+
+        // Then
+        $this->assertEquals($result, array("po1", "po2"));
+    }
+
+    /**
+     * Should GET with correct url.
+     *
+     * @test 
+     */
+    public function getIdsWithFiltersAndSort()
+    {
+        // Given
+        $filter = array("vendor" => "vendor1", "test" => "test1");
+        $sortConfig = new SortConfig("under_value", "desc");
+        $response = array(
+            "meta" => array(
+                "name" => "purchase-orders",
+                "display_name" => "purchase orders",
+                "total" => 2,
+                "count" => 2,
+                "limit" => PurchaseOrderProvider::$PAGINATION_LIMIT,
+                "page" => 0,
+                "start" => 0,
+                "end" => 1
+            ),
+            "purchase-orders" => array(
+                array("id" => "po1"),
+                array("id" => "po2"),
+            )
+        );
+        $expectedUrl = "purchase-orders?fields=id&vendor=vendor1&test=test1&under_value_sort=desc&limit=".PurchaseOrderProvider::$PAGINATION_LIMIT."&page=0";
+        $this->_mockApi->expects($this->once())
+            ->method('getResource')
+            ->with($this->equalTo($expectedUrl))
+            ->will($this->returnValue($response));
+
+        // When
+        $result = $this->getPurchaseOrderProvider()->getIds($filter, $sortConfig);
+
+        // Then
+        $this->assertEquals($result, array("po1", "po2"));
+    }
+
+    /**
+     * Should get all pages
+     *
+     * @test 
+     */
+    public function getIdsShouldPaginate()
+    {
+        // Given
+        $filter = array("vendor" => "vendor1", "test" => "test1");
+        $sortConfig = new SortConfig("under_value", "desc");
+        $response1 = array(
+            "meta" => array(
+                "name" => "purchase-orders",
+                "display_name" => "purchase orders",
+                "total" => 150,
+                "count" => 100,
+                "limit" => PurchaseOrderProvider::$PAGINATION_LIMIT,
+                "page" => 0,
+                "start" => 0,
+                "end" => 0
+            ),
+            "purchase-orders" => array(
+                array("id" => "po1"),
+                array("id" => "po2"),
+            )
+        );
+        $response2 = array(
+            "meta" => array(
+                "name" => "purchase-orders",
+                "display_name" => "purchase orders",
+                "total" => 150,
+                "count" => 50,
+                "limit" => PurchaseOrderProvider::$PAGINATION_LIMIT,
+                "page" => 1,
+                "start" => 0,
+                "end" => 1
+            ),
+            "purchase-orders" => array(
+                array("id" => "po3"),
+                array("id" => "po4"),
+            )
+        );
+        $expectedUrl1 = "purchase-orders?fields=id&vendor=vendor1&test=test1&under_value_sort=desc&limit=".PurchaseOrderProvider::$PAGINATION_LIMIT."&page=0";
+        $expectedUrl2 = "purchase-orders?fields=id&vendor=vendor1&test=test1&under_value_sort=desc&limit=".PurchaseOrderProvider::$PAGINATION_LIMIT."&page=1";
+        $this->_mockApi->expects($this->exactly(2))
+            ->method('getResource')
+            ->will(
+                $this->returnValueMap(
+                    array(
+                    array($expectedUrl1, $response1),
+                    array($expectedUrl2, $response2),
+                    )
+                )
+            );
+
+        // When
+        $result = $this->getPurchaseOrderProvider()->getIds($filter, $sortConfig);
+
+        // Then
+        $this->assertEquals($result, array("po1", "po2", "po3", "po4"));
     }
 
     private function assertResult(PurchaseOrder $result)
