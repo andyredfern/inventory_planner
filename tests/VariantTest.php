@@ -1,7 +1,7 @@
 <?php
 
 namespace Andyredfern\Invplan;
-use Andyredfern\Invplan\Models\InvPlanAPI;
+use Andyredfern\Invplan\Adapters\InvPlanAPI;
 
 class VariantTest extends \PHPUnit\Framework\TestCase
 {
@@ -34,7 +34,7 @@ class VariantTest extends \PHPUnit\Framework\TestCase
     {
         $getResponse = array("variant"=>array("sku"=>"123456"));
 
-        $api = $this->getMockBuilder('Andyredfern\Invplan\Models\InvPlanAPI')
+        $api = $this->getMockBuilder('Andyredfern\Invplan\Adapters\InvPlanAPI')
             ->setConstructorArgs(array(self::$TOKEN, self::$ACCOUNT))
             ->getMock();
 
@@ -58,7 +58,7 @@ class VariantTest extends \PHPUnit\Framework\TestCase
     {
         $patchResponse = array("variant"=>array("sku"=>"123456"));
 
-        $api = $this->getMockBuilder('Andyredfern\Invplan\Models\InvPlanAPI')
+        $api = $this->getMockBuilder('Andyredfern\Invplan\Adapters\InvPlanAPI')
             ->setConstructorArgs(array(self::$TOKEN, self::$ACCOUNT))
             ->getMock();
 
@@ -83,7 +83,7 @@ class VariantTest extends \PHPUnit\Framework\TestCase
     {
         $putResponse = array("variant"=>array("sku"=>"123456"));
 
-        $api = $this->getMockBuilder('Andyredfern\Invplan\Models\InvPlanAPI')
+        $api = $this->getMockBuilder('Andyredfern\Invplan\Adapters\InvPlanAPI')
             ->setConstructorArgs(array(self::$TOKEN, self::$ACCOUNT))
             ->getMock();
 

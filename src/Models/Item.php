@@ -3,30 +3,20 @@
 namespace Andyredfern\Invplan\Models;
 
 /**
- * Class PurchaseOrder
+ * Class Item
  *
  * @package Andyredfern\InvPlan
  */
-class PurchaseOrder
+class Item
 {
     /**
      * Location for overloaded data.  
      */
     private $_data = array();
 
-    private $_items;
-
     public function __construct($data)
     {
         $this->_data = $data;
-        $this->_items = new Items(
-            ...array_map(
-                function ($item) {
-                    return new Item($item);
-                },
-                $data["items"] ?? array()
-            )
-        );
     }
 
     public function __get($name)
@@ -43,16 +33,6 @@ class PurchaseOrder
             E_USER_NOTICE
         );
         return null;
-    }
-
-    public function getData(): array
-    {
-        return $this->_data;
-    }
-
-    public function getItems(): Items
-    {
-        return $this->_items;
     }
 
     public function getId()

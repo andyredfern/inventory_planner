@@ -1,6 +1,6 @@
 <?php
 
-namespace Andyredfern\Invplan\Models;
+namespace Andyredfern\Invplan\Providers;
 use Andyredfern\Invplan\Interfaces\ApiInterface;
 use Andyredfern\Invplan\Exceptions\InvplanException;
 use \GuzzleHttp\Client;

@@ -1,7 +1,7 @@
 <?php
 
-namespace Andyredfern\Invplan\Models;
-Use Andyredfern\Invplan\Models\APIClass;
+namespace Andyredfern\Invplan\Providers;
+Use Andyredfern\Invplan\Providers\APIClass;
 
 /**
  * Class VariantVendors
