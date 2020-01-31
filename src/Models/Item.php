@@ -39,4 +39,9 @@ class Item
     {
         return $this->_data["id"];
     }
+
+    public function expose(): array
+    {
+        return $this->_data;
+    }
 }

@@ -21,4 +21,22 @@ class Items extends \ArrayIterator
     {
         return parent::offsetGet($offset);
     }
+
+    public function expose() : array
+    {
+        $items = array();
+        foreach ($this as $item) {
+            $items[] = $item->expose();
+        }
+        return $items;
+    }
+
+    public static function fromUntyped(array $itemArray): Items
+    {
+        $items = new Items();
+        foreach ($itemArray as $item) {
+            $items[] = new Item($item);
+        }
+        return $items;
+    }
 }

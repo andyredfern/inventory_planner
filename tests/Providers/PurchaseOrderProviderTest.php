@@ -5,6 +5,7 @@ use Andyredfern\Invplan\Providers\InvPlanAPI;
 use Andyredfern\Invplan\Providers\PurchaseOrderProvider;
 use Andyredfern\Invplan\Models\PurchaseOrder;
 use Andyredfern\Invplan\Models\Item;
+use Andyredfern\Invplan\Models\Items;
 use Andyredfern\Invplan\Models\SortConfig;
 use PhpOption\None;
 
@@ -121,6 +122,43 @@ class PurchaseOrderTest extends \PHPUnit\Framework\TestCase
 
         // Then
         $this->assertResult($result);
+    }
+    
+    /**
+     * 
+     *
+     * @test 
+     */
+    public function patchItems()
+    {
+        // Given
+        $itemsArray = array(
+            array('id'=>"item1",'received' => 7),
+            array('id'=>"item2",'received' => 5),
+        );
+        $expectedPatch = array('items' => $itemsArray);
+        $items = Items::fromUntyped($itemsArray);
+        $apiResponse = array(
+            'items' => array(
+                array('id'=>"item1",'received' => 7, 'replenishment' => 10),
+                array('id'=>"item2",'received' => 5, 'replenishment' => 20),
+            )
+            );
+        $this->_mockApi->expects($this->once())
+            ->method('patchResource')
+            ->with(
+                $this->equalTo("purchase-orders/po1/items"),
+                $this->equalTo($expectedPatch)
+            )
+            ->will($this->returnValue($apiResponse));
+
+        // When
+        $result = $this->getPurchaseOrderProvider()->patchItems("po1", $items);
+
+        // Then
+        $this->assertEquals(count($result), 2);
+        $this->assertEquals($result[0]->replenishment, 10);
+        $this->assertEquals($result[1]->replenishment, 20);
     }
 
     /**

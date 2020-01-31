@@ -1,6 +1,8 @@
 <?php
 
 namespace Andyredfern\Invplan\Providers;
+
+use Andyredfern\Invplan\Models\Items;
 Use Andyredfern\Invplan\Models\PurchaseOrder;
 use Andyredfern\Invplan\Models\SortConfig;
 
@@ -71,6 +73,13 @@ class PurchaseOrderProvider
         return $this->_parseResponse($response);
     }
 
+    public function patchItems(string $id, Items $items): Items
+    {
+        $patch = array('items' => $items->expose());
+        $response = $this->_interface->patchResource("purchase-orders/".$id."/items", $patch);
+        return $this->_parseItemsResponse($response);
+    }
+
     public function applyUpdate(string $id, PurchaseOrder $purchaseOrder): PurchaseOrder
     {
         $update = array('purchase-order' => $purchaseOrder->getData());
@@ -91,6 +100,14 @@ class PurchaseOrderProvider
             throw new \Exception(json_encode($response));
         }
         return new PurchaseOrder($response["purchase-order"]);
+    }
+
+    private function _parseItemsResponse(array $response)
+    {
+        if (array_key_exists("result", $response) && $response["result"]["status"] == "error") {
+            throw new \Exception(json_encode($response));
+        }
+        return Items::fromUntyped($response["items"]);
     }
 
     private function _appendPagination(string $baseUrl, int $page): string
