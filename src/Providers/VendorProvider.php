@@ -63,7 +63,7 @@ class VendorProvider
 
     public function getById(string $id): Vendor
     {
-        $response = $this->_interface->getResource("vendors/" . $id);
+        $response = $this->_interface->getResource("vendors/" . rawurlencode($id));
         return $this->_parseResponse($response);
     }
 
@@ -71,6 +71,9 @@ class VendorProvider
     private function _parseResponse(array $response): Vendor
     {
         if (array_key_exists("result", $response) && $response["result"]["status"] == "error") {
+            throw new Exception(json_encode($response));
+        }
+        if (!array_key_exists("vendor", $response)) {
             throw new Exception(json_encode($response));
         }
         return new Vendor($response["vendor"]);
