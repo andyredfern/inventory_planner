@@ -15,9 +15,9 @@ class PurchaseOrderProvider
 {
 
     /**
-     * 
      *
-     * @var string The interface controls which API gets called by the class. For live Guzzle is injected in. 
+     *
+     * @var string The interface controls which API gets called by the class. For live Guzzle is injected in.
      */
     private $_interface;
 
@@ -53,7 +53,7 @@ class PurchaseOrderProvider
             foreach ($response["purchase-orders"] as $purchaseOrder) {
                 $purchaseOrderIds[] = $purchaseOrder["id"];
             }
-            $isLastPage = $response["meta"]["end"];
+            $isLastPage = $response["meta"]["count"] < $response["meta"]["limit"];
             $page++;
         }
 

@@ -13,9 +13,9 @@ class VariantProvider
 {
 
     /**
-     * 
      *
-     * @var string The interface controls which API gets called by the class. For live Guzzle is injected in. 
+     *
+     * @var string The interface controls which API gets called by the class. For live Guzzle is injected in.
      */
     private $_interface;
 
@@ -51,7 +51,7 @@ class VariantProvider
             foreach ($response["variants"] as $variant) {
                 $variantIds[] = $variant["id"];
             }
-            $isLastPage = $response["meta"]["end"];
+            $isLastPage = $response["meta"]["count"] < $response["meta"]["limit"];
             $page++;
         }
 

@@ -54,7 +54,7 @@ class VendorProvider
             foreach ($response["vendors"] as $vendor) {
                 $vendorIds[] = $vendor["id"];
             }
-            $isLastPage = $response["meta"]["end"];
+            $isLastPage = $response["meta"]["count"] < $response["meta"]["limit"];
             $page++;
         }
 
