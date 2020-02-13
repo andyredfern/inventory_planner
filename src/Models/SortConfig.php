@@ -38,7 +38,7 @@ class SortConfig
         return $this->_field."_sort";
     }
 
-    public function getDirection()
+    public function getDirection(): string
     {
         return $this->_direction;
     }
