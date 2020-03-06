@@ -4,6 +4,7 @@ namespace Andyredfern\Invplan\Providers;
 
 use Andyredfern\Invplan\Models\Items;
 Use Andyredfern\Invplan\Models\PurchaseOrder;
+use Andyredfern\Invplan\Models\PurchaseOrders;
 use Andyredfern\Invplan\Models\SortConfig;
 
 /**
@@ -30,10 +31,21 @@ class PurchaseOrderProvider
 
     public function getIds(array $filter, SortConfig $sortConfig): array
     {
+        $ids = [];
+        foreach ($this->getFields($filter, $sortConfig, ["id"]) as $po) {
+            $ids[] = $po->getId();
+        }
+        return $ids;
+    }
+
+    public function getFields(array $filter, SortConfig $sortConfig, array $fields): PurchaseOrders
+    {
         $baseUrl =  "purchase-orders?";
 
-        $fields = "id";
-        $baseUrl .= "fields=" . $fields;
+        if (!in_array("id", $fields)) {
+            $fields[] = "id";
+        }
+        $baseUrl .= "fields=" . implode(",", $fields);
 
         if (!empty($filter)) {
             $filterUrl = http_build_query($filter);
@@ -44,20 +56,20 @@ class PurchaseOrderProvider
             $baseUrl .= "&" .$sortConfig->getUrlField()."=".$sortConfig->getDirection();
         }
 
-        $purchaseOrderIds = array();
+        $purchaseOrders = new PurchaseOrders();
         $page = 0;
         $isLastPage = 0;
 
         while ($isLastPage == 0) {
             $response = $this->_interface->getResource($this->_appendPagination($baseUrl, $page));
             foreach ($response["purchase-orders"] as $purchaseOrder) {
-                $purchaseOrderIds[] = $purchaseOrder["id"];
+                $purchaseOrders[] = new PurchaseOrder($purchaseOrder);
             }
             $isLastPage = $response["meta"]["count"] < $response["meta"]["limit"];
             $page++;
         }
 
-        return $purchaseOrderIds;
+        return $purchaseOrders;
     }
 
     public function getById(string $id): PurchaseOrder
