@@ -85,21 +85,6 @@ class ImportsProvider
         return $this->_parseResponse($response);
     }
 
-    /*
-    public function applyUpdate(string $id, PurchaseOrder $purchaseOrder): PurchaseOrder
-    {
-        $update = array('purchase-order' => $purchaseOrder->getData());
-        $response = $this->_interface->putResource("purchase-orders/".$id, $update);
-        return $this->_parseResponse($response);
-    }
-
-    public function create(PurchaseOrder $purchaseOrder): PurchaseOrder
-    {
-        $create = array('purchase-order' => $purchaseOrder->getData());
-        $response = $this->_interface->postResource("purchase-orders", $create);
-        return $this->_parseResponse($response);
-    }
-    */
     private function _parseResponse(array $response)
     {
         if (array_key_exists("result", $response) && $response["result"]["status"] == "error") {

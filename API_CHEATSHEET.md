@@ -47,3 +47,8 @@ returns:
 }
 ```
 Ouch!
+
+
+### Using the imports API
+The official docs make no reference to an imports API but the are two end points if you want to automate importing - files and imports.
+
