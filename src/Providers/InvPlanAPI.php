@@ -174,6 +174,58 @@ class InvPlanAPI implements ApiInterface
         return json_decode($res->getBody(), true); 
     }
 
+    public function postFileResource($resourceType, $filename)
+    {
+  
+        $url = self::$baseUrl . self::$apiVersion . "/" . $resourceType;
+        
+        try {
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => $url,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS => array('name'=> new \CURLFILE($filename)),
+                CURLOPT_HTTPHEADER => array(
+                    'Authorization: '. self::$apiKey,
+                    'Account: '.self::$accountId
+                ), 
+            ));
+        
+            $response = curl_exec($curl);
+            curl_close($curl);
+        } catch (\Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
+        return json_decode($response, true); 
+    }
+
+    public function deleteResource($resourceType, $resourceId)
+    {
+  
+        $client = new \GuzzleHttp\Client();
+
+        $url = self::$baseUrl . self::$apiVersion . "/" . $resourceType . "/" . $resourceId;
+        
+        try {
+            $res = $client->request(
+                'DELETE', $url, [
+                'headers' => [
+                    'Authorization' => self::$apiKey,
+                    'Account'     => self::$accountId,
+                ],
+                ]
+            );
+        } catch (\Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
+        return json_decode($res->getBody(), true); 
+    }
 
 
     /**
