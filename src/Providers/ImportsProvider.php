@@ -65,7 +65,7 @@ class ImportsProvider
         return $this->_parseResponse($response);
     }
 
-    public function deleteById(string $id): Array
+    public function deleteById(string $id)
     {
         $response = $this->_interface->deleteResource("imports", $id);
         return $response;

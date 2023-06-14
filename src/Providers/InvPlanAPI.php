@@ -176,33 +176,16 @@ class InvPlanAPI implements ApiInterface
 
     public function postFileResource($resourceType, $filename)
     {
-  
+
+        $filename = $_SERVER["DOCUMENT_ROOT"] . "/". $filename;
         $url = self::$baseUrl . self::$apiVersion . "/" . $resourceType;
-        
         try {
-            $curl = curl_init();
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => $url,
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => array('name'=> new \CURLFILE($filename)),
-                CURLOPT_HTTPHEADER => array(
-                    'Authorization: '. self::$apiKey,
-                    'Account: '.self::$accountId
-                ), 
-            ));
-        
-            $response = curl_exec($curl);
-            curl_close($curl);
+            $cmd = "curl --location --request POST 'https://app.inventory-planner.com/api/v1/files' --header 'Authorization: ".self::$apiKey."' --header 'Account: ".self::$accountId."' --form 'name=@\"". $filename ."\"'";
+            $result = shell_exec($cmd);
         } catch (\Exception $e) {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
-        return json_decode($response, true); 
+        return json_decode($result, true); 
     }
 
     public function deleteResource($resourceType, $resourceId)
